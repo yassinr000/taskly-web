@@ -1,1 +1,40 @@
 @import "tailwindcss";
+
+/* Thème professionnel : police Inter, accent indigo (remplace le vert),
+   couleurs slate par défaut. Les composants existants en profitent sans changer. */
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --color-green-50: #eef2ff;
+  --color-green-100: #e0e7ff;
+  --color-green-200: #c7d2fe;
+  --color-green-500: #6366f1;
+  --color-green-600: #4f46e5;
+  --color-green-700: #4338ca;
+}
+
+body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+h1, h2, h3 { letter-spacing: -0.01em; }
+
+/* Interactions fluides partout */
+button, a, input, select, textarea { transition: background-color .2s, border-color .2s, color .2s, box-shadow .2s, transform .15s; }
+button:not(:disabled):active { transform: scale(.97); }
+input:focus, select:focus, textarea:focus { outline: none; border-color: #6366f1 !important; box-shadow: 0 0 0 3px rgba(99,102,241,.18); }
+:focus-visible { outline: 2px solid #6366f1; outline-offset: 2px; }
+
+/* Bouton principal */
+.bg-green-600:hover:not(:disabled) { box-shadow: 0 6px 16px rgba(79,70,229,.3); transform: translateY(-1px); }
+
+/* Cartes : légère élévation au survol */
+.bg-white.rounded-xl.p-3, .bg-white.rounded-xl.p-4 { transition: transform .2s, box-shadow .2s, border-color .2s; }
+.bg-white.rounded-xl.p-3:hover, .bg-white.rounded-xl.p-4:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(15,23,42,.08); border-color: #c7d2fe; }
+
+/* Apparition douce des pages, des cartes et des fenêtres */
+@keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes pop { from { opacity: 0; transform: scale(.96); } to { opacity: 1; transform: none; } }
+main > * { animation: rise .35s ease-out both; }
+main .grid > *, main .space-y-2 > *, main .space-y-3 > * { animation: rise .4s ease-out both; }
+main .grid > *:nth-child(2) { animation-delay: .05s; } main .grid > *:nth-child(3) { animation-delay: .1s; }
+main .grid > *:nth-child(4) { animation-delay: .15s; } main .grid > *:nth-child(n+5) { animation-delay: .2s; }
+.shadow-xl.bg-white { animation: pop .2s ease-out both; }
+
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
