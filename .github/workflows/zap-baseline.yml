@@ -1,0 +1,36 @@
+name: ZAP baseline (staging)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [feature/zap-scan]
+
+permissions:
+  contents: read
+
+jobs:
+  zap:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: api
+            target: https://taskly-api-production.up.railway.app
+          - name: site
+            target: https://taskly-web-git-develop-yassinr-s-projects.vercel.app
+    steps:
+      - name: Prepare report folder
+        run: mkdir -p zap-out && chmod 777 zap-out
+
+      - name: Run ZAP baseline scan
+        run: |
+          docker run --rm -v "$(pwd)/zap-out:/zap/wrk:rw" -t ghcr.io/zaproxy/zaproxy:stable \
+            zap-baseline.py -t "${{ matrix.target }}" -r "report-${{ matrix.name }}.html" -I
+
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: zap-report-${{ matrix.name }}
+          path: zap-out/
