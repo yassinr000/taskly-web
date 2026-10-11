@@ -4,6 +4,7 @@ import api from '../api/axios'
 import { useAuth } from '../context/AuthContext'
 import Modal from '../components/Modal'
 import Field from '../components/Field'
+import { BoardsSkeleton } from '../components/Skeleton'
 import { parseError } from '../utils/errors'
 
 function BoardForm({ board, onSaved, onClose }) {
@@ -86,7 +87,7 @@ export default function Boards() {
       </div>
 
       {error && <p className="text-red-600 mb-2">{error}</p>}
-      {!boards && !error && <p>Chargement...</p>}
+      {!boards && !error && <BoardsSkeleton />}
       {boards && boards.length === 0 && (
         <p className="text-slate-500">Tu n'as encore aucun board. Crée le premier avec le bouton ci-dessus.</p>
       )}

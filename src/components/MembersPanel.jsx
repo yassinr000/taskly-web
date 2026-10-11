@@ -49,8 +49,8 @@ export default function MembersPanel({ board, onChanged }) {
           const memberIsOwner = m.id === board.owner_id
           const canRemove = !memberIsOwner && (isOwner || m.id === user.id)
           return (
-            <li key={m.id} className="flex items-center justify-between text-sm">
-              <span>
+            <li key={m.id} className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 text-sm">
+              <span className="min-w-0 break-words">
                 {m.name} <span className="text-slate-500">({m.email})</span>
                 {memberIsOwner && (
                   <span className="ml-2 text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full">

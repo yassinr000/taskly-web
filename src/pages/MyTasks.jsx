@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import api from '../api/axios'
+import { ListSkeleton } from '../components/Skeleton'
 import { STATUS_LABELS, formatDate, isOverdue } from '../utils/tasks'
 
 const FILTERS = [
@@ -46,7 +47,7 @@ export default function MyTasks() {
       </div>
 
       {error && <p className="text-red-600">{error}</p>}
-      {!tasks && !error && <p>Chargement...</p>}
+      {!tasks && !error && <ListSkeleton rows={5} />}
       {tasks && tasks.length === 0 && (
         <p className="text-slate-500">Aucune tâche ne correspond à ce filtre.</p>
       )}

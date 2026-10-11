@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import api from '../api/axios'
 import { useAuth } from '../context/AuthContext'
 import { parseError } from '../utils/errors'
+import { Spinner } from './Skeleton'
 
 export default function FilesSection({ task, board }) {
   const { user } = useAuth()
@@ -66,8 +67,8 @@ export default function FilesSection({ task, board }) {
       <h3 className="font-semibold mb-2">Fichiers ({files.length})</h3>
       <ul className="space-y-1 mb-3">
         {files.map((f) => (
-          <li key={f.id} className="flex items-center justify-between text-sm bg-slate-50 rounded-lg p-2">
-            <button onClick={() => download(f)} className="text-blue-600 hover:underline text-left">
+          <li key={f.id} className="flex items-center justify-between gap-2 text-sm bg-slate-50 rounded-lg p-2">
+            <button onClick={() => download(f)} className="text-blue-600 hover:underline text-left break-all">
               📎 {f.original_name}
             </button>
             {(f.user_id === user.id || board.owner_id === user.id) && (
@@ -80,7 +81,11 @@ export default function FilesSection({ task, board }) {
       </ul>
       <input type="file" onChange={upload} disabled={uploading} className="text-sm" />
       <p className="text-xs text-slate-500 mt-1">5 Mo maximum. PDF, images, Word, Excel, texte.</p>
-      {uploading && <p className="text-sm text-slate-500">Envoi en cours...</p>}
+      {uploading && (
+        <p className="text-sm text-slate-500 flex items-center gap-2 mt-1" role="status">
+          <Spinner /> Envoi en cours...
+        </p>
+      )}
       {error && <p className="text-sm text-red-600 mt-1">{error}</p>}
     </section>
   )

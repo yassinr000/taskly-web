@@ -6,6 +6,7 @@ import TaskCard from '../components/TaskCard'
 import TaskFormModal from '../components/TaskFormModal'
 import MembersPanel from '../components/MembersPanel'
 import TaskDetailModal from '../components/TaskDetailModal'
+import { BoardDetailSkeleton } from '../components/Skeleton'
 import { STATUSES, STATUS_LABELS } from '../utils/tasks'
 
 export default function BoardDetail() {
@@ -54,7 +55,7 @@ export default function BoardDetail() {
       </div>
     )
   }
-  if (!board) return <p>Chargement...</p>
+  if (!board) return <BoardDetailSkeleton />
 
   const canDelete = (task) => task.created_by === user.id || board.owner_id === user.id
 

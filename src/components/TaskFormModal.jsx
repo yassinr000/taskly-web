@@ -60,7 +60,7 @@ export default function TaskFormModal({ board, task, onSaved, onClose }) {
           />
         </label>
 
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <label className="block">
             <span className="text-sm font-medium text-slate-700">Statut</span>
             <select value={form.status} onChange={set('status')} className={selectClass}>
@@ -79,7 +79,7 @@ export default function TaskFormModal({ board, task, onSaved, onClose }) {
           </label>
         </div>
 
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <Field label="Date limite" type="date" value={form.due_date} onChange={set('due_date')} error={fields.due_date} />
           <label className="block">
             <span className="text-sm font-medium text-slate-700">Assignée à</span>

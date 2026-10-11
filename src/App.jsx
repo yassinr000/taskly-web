@@ -9,6 +9,7 @@ import MyTasks from './pages/MyTasks'
 import Boards from './pages/Boards'
 import BoardDetail from './pages/BoardDetail'
 import Settings from './pages/Settings'
+import Receipt from './pages/Receipt'
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
             <Route path="/my-tasks" element={<MyTasks />} />
             <Route path="/boards" element={<Boards />} />
             <Route path="/boards/:id" element={<BoardDetail />} />
+            <Route path="/receipt" element={<Receipt />} />
             <Route path="/settings" element={<Settings />} />
           </Route>
           <Route path="*" element={<Navigate to="/" replace />} />

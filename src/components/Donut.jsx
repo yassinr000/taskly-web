@@ -6,7 +6,7 @@ export default function Donut({ todo, inProgress, done }) {
   const p2 = p1 + (total ? (inProgress / total) * 100 : 0)
   const background =
     total === 0
-      ? '#e2e8f0'
+      ? 'var(--color-slate-200)'
       : `conic-gradient(#22c55e 0 ${p1}%, #3b82f6 ${p1}% ${p2}%, #f59e0b ${p2}% 100%)`
 
   const legend = [
