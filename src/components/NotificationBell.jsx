@@ -30,10 +30,10 @@ export default function NotificationBell() {
   }
 
   return (
-    <div className="relative">
+    <div className="md:relative">
       <button
         onClick={() => setOpen(!open)}
-        className="relative text-xl"
+        className="relative text-xl p-1"
         aria-label={`Notifications (${data.unread_count} non lues)`}
       >
         🔔
@@ -45,7 +45,7 @@ export default function NotificationBell() {
       </button>
 
       {open && (
-        <div className="absolute right-0 mt-2 w-80 max-w-[90vw] bg-white border border-slate-200 rounded-xl shadow-lg z-40">
+        <div className="absolute left-3 right-3 top-full mt-2 md:left-auto md:right-0 md:w-80 bg-white border border-slate-200 rounded-xl shadow-lg z-40">
           <div className="flex items-center justify-between px-3 py-2 border-b border-slate-100">
             <span className="font-semibold text-sm">Notifications</span>
             {data.unread_count > 0 && (

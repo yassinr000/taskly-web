@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import Field from '../components/Field'
+import ThemeToggle from '../components/ThemeToggle'
+import { Spinner } from '../components/Skeleton'
 import { parseError } from '../utils/errors'
 
 export default function Login() {
@@ -39,7 +41,8 @@ export default function Login() {
         </div>
         <p className="text-sm text-slate-500">© 2026 Taskly</p>
       </div>
-      <div className="flex items-center justify-center bg-slate-50 p-6">
+      <div className="relative flex items-center justify-center bg-slate-50 p-6">
+        <div className="absolute top-4 right-4"><ThemeToggle /></div>
         <form onSubmit={submit} className="w-full max-w-sm space-y-5" style={{ animation: 'rise .4s ease-out both' }}>
           <div>
             <h1 className="text-2xl font-bold text-slate-900">Connexion</h1>
@@ -50,8 +53,9 @@ export default function Login() {
           <Field label="Mot de passe" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
           <button
             disabled={loading}
-            className="w-full bg-green-600 text-white rounded-lg p-2.5 font-medium hover:bg-green-700 disabled:opacity-60"
+            className="w-full inline-flex items-center justify-center gap-2 bg-green-600 text-white rounded-lg p-2.5 font-medium hover:bg-green-700 disabled:opacity-60"
           >
+            {loading && <Spinner />}
             {loading ? 'Connexion...' : 'Se connecter'}
           </button>
           <p className="text-sm text-center text-slate-600">

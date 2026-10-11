@@ -38,3 +38,57 @@ main .grid > *:nth-child(4) { animation-delay: .15s; } main .grid > *:nth-child(
 .shadow-xl.bg-white { animation: pop .2s ease-out both; }
 
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+
+/* Écrans de chargement (skeletons) : blocs gris qui pulsent doucement */
+:root { --sk-a: #e2e8f0; --sk-b: #f1f5f9; }
+html.dark { --sk-a: #1a2a42; --sk-b: #243752; }
+@keyframes shimmer { to { background-position: -200% 0; } }
+.sk { border-radius: .375rem; background: linear-gradient(90deg, var(--sk-a) 0%, var(--sk-b) 50%, var(--sk-a) 100%); background-size: 200% 100%; }
+main .sk, .sk { animation: shimmer 1.4s linear infinite; }
+
+/* Téléphone : pas de survol « qui monte » sur écran tactile, et zones de toucher confortables */
+@media (hover: none) {
+  .bg-white.rounded-xl.p-3:hover, .bg-white.rounded-xl.p-4:hover { transform: none; box-shadow: none; }
+}
+@media (max-width: 767px) {
+  input, select, textarea { font-size: 16px; } /* évite le zoom automatique sur iPhone */
+}
+
+/* ===== Thème sombre « Ocean Slate » =====
+   Tailwind lit ses couleurs dans des variables CSS : on les redéfinit sous .dark,
+   donc tous les composants existants changent de thème sans modification. */
+html.dark {
+  color-scheme: dark;
+  --color-white: #111c2e;       /* cartes et fenêtres */
+  --color-slate-50: #0b1220;    /* fond de page */
+  --color-slate-100: #15233a;   /* colonnes, survols */
+  --color-slate-200: #1e2d45;   /* bordures */
+  --color-slate-300: #2d4160;   /* bordures des champs */
+  --color-slate-400: #6f84a3;
+  --color-slate-500: #8196b3;   /* texte secondaire */
+  --color-slate-600: #a5b6cd;
+  --color-slate-700: #c5d2e4;
+  --color-slate-800: #e2eaf5;   /* texte principal */
+  --color-slate-900: #080e19;   /* menu latéral */
+  --color-green-100: #0e3340;   /* « green » = la couleur d'accent du site : cyan en thème sombre */
+  --color-green-200: #155e75;
+  --color-green-500: #22d3ee;
+  --color-green-600: #22d3ee;
+  --color-green-700: #67e8f9;
+  --color-red-50: #2a1418;
+  --color-red-100: #3b1a20;
+  --color-red-200: #5b2630;
+  --color-red-600: #f87171;
+  --color-red-700: #fca5a5;
+  --color-blue-600: #60a5fa;
+  --color-amber-100: #3a2a0c;
+  --color-amber-700: #fcd34d;
+}
+html.dark .text-white { color: #f8fafc; }
+html.dark .text-slate-900 { color: var(--color-slate-800); }
+html.dark .bg-green-600 { color: #04212a; }           /* texte sombre sur l'accent cyan */
+html.dark .bg-red-600 { background-color: #dc2626; color: #fff; }
+html.dark .bg-green-600:hover:not(:disabled) { box-shadow: 0 6px 16px rgba(34,211,238,.22); }
+html.dark .bg-white.rounded-xl.p-3:hover, html.dark .bg-white.rounded-xl.p-4:hover { border-color: #2d4160; box-shadow: 0 10px 24px rgba(0,0,0,.35); }
+html.dark input:focus, html.dark select:focus, html.dark textarea:focus { border-color: #22d3ee !important; box-shadow: 0 0 0 3px rgba(34,211,238,.18); }
+html.dark :focus-visible { outline-color: #22d3ee; }

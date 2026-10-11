@@ -4,6 +4,7 @@ import { useAuth } from '../context/AuthContext'
 import usePolling from '../hooks/usePolling'
 import StatCard from '../components/StatCard'
 import Donut from '../components/Donut'
+import { DashboardSkeleton } from '../components/Skeleton'
 import { formatDate } from '../utils/tasks'
 
 export default function Dashboard() {
@@ -22,7 +23,7 @@ export default function Dashboard() {
       .catch(() => setError('Impossible de charger le dashboard.'))
   }, 30000)
 
-  if (!stats) return <p className={error ? 'text-red-600' : ''}>{error || 'Chargement...'}</p>
+  if (!stats) return error ? <p className="text-red-600">{error}</p> : <DashboardSkeleton />
 
   return (
     <div>
